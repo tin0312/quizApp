@@ -1,0 +1,36 @@
+# Dependency folders
+node_modules/
+build/
+dist/
+coverage/
+
+# Environment files
+.env
+.env.local
+
+# IDE and editor-specific files
+.vscode/
+.idea/
+*.iml
+.DS_Store
+
+# Compiled output
+build/
+*.log
+
+# Cache and lock files
+yarn-error.log
+yarn.lock
+package-lock.json
+
+# Generated files
+*.min.js
+*.min.css
+*.map
+
+# Editor backup files
+*~
+*.swp
+
+# Testing and build artifacts
+coverage/
