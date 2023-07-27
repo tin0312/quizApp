@@ -7,9 +7,9 @@ import Questions from './Questions'
 
 export default function App() {
   const [selectedAnswers, setSelectedAnswers] = React.useState({})
-  const [correctAnswer, setCorrectAnswer] = React.useState([])// an array of correct answers 
-  const [startQuiz, setStartQuiz] = React.useState(false)
-  const [result, setResult] = React.useState([])
+  const [correctAnswers, setCorrectAnswers] = React.useState({})
+  const [isStarted, setIsStarted] = React.useState(false)
+  const [quizData, setQuizData] = React.useState([])
   const [score, setScore] = React.useState(0)
   const [showScore, setShowScore] = React.useState(false)
   const [refetch, setRefetch] = React.useState(false)
@@ -22,12 +22,11 @@ export default function App() {
         const response = await fetch(apiUrl)
         const data = await response.json()
 
-        const shuffledResults = data.results.map((question) => {// each question here is an object 
-          const allAnswers = shuffleArray([...question.incorrect_answers, question.correct_answer])// all answers
+        const shuffledData = data.results.map((question) => { 
+          const allAnswers = shuffleArray([...question.incorrect_answers, question.correct_answer])
           const decodedQuestion = decode(question.question)
-          const decodedAnswers = allAnswers.map((answer) => decode(answer)) // 5 objects, each object has an array of 4 answers
-          const correctAnswer = decode(question.correct_answer) // an array of 5 correct answers
-
+          const decodedAnswers = allAnswers.map((answer) => decode(answer)) 
+          const correctAnswer = decode(question.correct_answer) 
           return {
             id: nanoid(),
             question: decodedQuestion,
@@ -36,9 +35,15 @@ export default function App() {
           }
         })
 
-        setResult(shuffledResults)// now result is an array of 5 objects, each object has 4 properties: id, question, answers, correctAnswer
-        // each object now has an ID 
-        setCorrectAnswer(shuffledResults.map((question) => question.correctAnswer))
+        setQuizData(shuffledData)
+        // as the accumulator goes over each of the elenment in the shuffledArray
+        const correctAnswerses= shuffledData.reduce((acc, question) => {
+          acc[question.id] = question.correctAnswer // set value of each correct answer to each coressponding questionID 
+          return acc
+        }, {})
+
+        setCorrectAnswers(correctAnswerses)
+
       } catch (error) {
         console.log(error)
       }
@@ -58,7 +63,7 @@ export default function App() {
   }
 
   function handleStartQuiz() {
-    setStartQuiz(true)
+    setIsStarted(true)
   }
 
   function handleCheckAnswer() {
@@ -67,49 +72,51 @@ export default function App() {
 
 
   function handleSelectedAnswer(questionID, selectedAnswer) {
-    const updatedSelectedAnswers = { ...selectedAnswers };
-    updatedSelectedAnswers[questionID] = selectedAnswer;
-    setSelectedAnswers(updatedSelectedAnswers);
+    setSelectedAnswers((prevAnswer) => ({ ...prevAnswer, [questionID]: selectedAnswer }));
   }
  
   React.useEffect(() => {
     function calculateScore() {
-      const userScore = Object.keys(selectedAnswers).reduce((score, questionID) => {
-        const question = result.find((q) => q.id === questionID);
-        const selectedAnswer = selectedAnswers[questionID];
-  
-        if (question.correctAnswer === selectedAnswer) {
-          return score + 1;
-        } else {
-          return score;
+      const userAnswers = Object.keys(selectedAnswers);
+      const userScore = userAnswers.reduce((score, questionID) => {
+        const selectedAnswer = selectedAnswers[questionID]
+        const correctAnswer = correctAnswers[questionID]
+
+        if (correctAnswer === selectedAnswer) {
+          score += 1
         }
-      }, 0);
-      setScore(userScore);
+
+        return score;
+      }, 0)
+
+      setScore(userScore)
     }
-  
+
     calculateScore();
-  }, [selectedAnswers]);
+  }, [selectedAnswers, correctAnswers])
+
   
 
   function handlePlayAgain() {
     setRefetch((prevState) => !prevState)
     setShowScore(false)
     setSelectedAnswers([])
-    setCorrectAnswer([])
+    setCorrectAnswers([])
     setScore(0)
   }
 
   return (
     <div className="main-container">
-      {startQuiz ? (
+      {isStarted ? (
         <Questions
           handleSelectedAnswer={handleSelectedAnswer}
-          questions={result}
+          questions = {quizData}
           selectedAnswers={selectedAnswers}
           showScore={showScore}
           score={score}
           handleCheckAnswer={handleCheckAnswer}
           handlePlayAgain={handlePlayAgain}
+          correctAnswers = {correctAnswers}
         />
       ) : (
         <StartPage handleStartQuiz={handleStartQuiz} />
@@ -117,10 +124,5 @@ export default function App() {
     </div>
   )}
 
-
-// Current behaviours of the app
-// 1.Incorrect answers are not labled in red
-// 2. Correct answers are not labeled as correct answers
-// 3. Correct answers are not showing up after the check answer button
 
 
