@@ -3,13 +3,10 @@
   padding: 0;
   box-sizing: border-box;
   font-size: 16px;
-  
- 
-
 }
 body {
   color: #293264;
-  background-image: url('intro-page.png');
+  background-image: url("intro-page.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -20,8 +17,6 @@ body {
   align-items: center;
   height: 100vh;
   gap: 10px;
-
-  
 }
 .start-container--info {
   font-weight: 400;
@@ -30,7 +25,7 @@ body {
   color: #293264;
   letter-spacing: 1.25px;
   margin-bottom: 10px;
-  font-family: 'Inter', 'sans-serif';
+  font-family: "Inter", "sans-serif";
 }
 .start-container--name {
   font-size: 31.25px;
@@ -38,9 +33,9 @@ body {
   line-height: 37px;
   color: #293264;
   letter-spacing: 2.5px;
-  font-family: 'Karla', 'sans-serif';
+  font-family: "Karla", "sans-serif";
 }
-.developer{ 
+.developer {
   font-size: 16px;
   font-weight: 400;
   line-height: 19px;
@@ -48,10 +43,8 @@ body {
   letter-spacing: 1.25px;
   margin: 0 auto;
   padding: 10px;
-
 }
 .main-container {
-
   margin-top: 0;
   margin-left: 70px;
   margin-right: 70px;
@@ -59,31 +52,51 @@ body {
   flex-direction: column;
   height: 100vh;
   justify-content: space-around;
-  
-  
 }
-.container{
+.option-window {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 10px;
+}
+.loading-state {
+  text-transform: uppercase;
+  margin-top: 30px;
+  font-size: 24px;
+  animation: bounce 1.5s infinite;
+  letter-spacing: 2px;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.container {
   display: flex;
   flex-direction: column;
   gap: 30px;
   align-items: flex-start;
- 
   width: 100%;
-
 }
 
-.container h2{
-  font-family: 'Karla', 'sans-serif';
+.container h2 {
+  font-family: "Karla", "sans-serif";
   font-weight: 700;
   font-size: 20px;
   line-height: 19px;
 }
 .container--answers {
- 
   display: flex;
   width: auto;
   gap: 20px;
-
 }
 
 .container--answer {
@@ -92,10 +105,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Inter', 'sans-serif' ;
+  font-family: "Inter", "sans-serif";
   font-size: 10px;
   line-height: 18px;
- 
 }
 /*making radio button look likes like a button*/
 input[type="radio"] {
@@ -126,18 +138,11 @@ input[type="radio"]:checked + label {
 input[type="radio"].incorrect-answer:checked + label {
   background-color: #f8bcbc;
   opacity: 0.5;
-
-  
 }
 input[type="radio"].incorrect-answer + label {
   opacity: 0.5;
-
- 
 }
-
-#check-btn,
-#start-button
-{
+.button {
   width: 160px;
   height: auto;
   margin: 0 auto;
@@ -149,32 +154,23 @@ input[type="radio"].incorrect-answer + label {
   cursor: pointer;
   font-weight: 500;
   text-align: center;
-  font-family: 'Inter', 'sans-serif';
+  font-family: "Inter", sans-serif;
 }
 
+.button:hover {
+  background-color: #344078;
+}
 div.show-score {
   display: flex;
   width: 100%;
   justify-content: center;
   gap: 2.5%;
 }
-#play-again-btn {
-  width: 160px;
-  height: auto;
-  padding: 10px;
-  color: white;
-  background-color: #4d5b9e;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-}
 h3.user-score {
-  font-family: 'Inter', 'sans-serif';
+  font-family: "Inter", "sans-serif";
   font-weight: 700;
   font-size: 16px;
   align-self: center;
- 
-  
 }
 
 /* Media Queries */
@@ -185,7 +181,7 @@ h3.user-score {
     margin: 20px;
     gap: 20px;
   }
-  .start-container{
+  .start-container {
     height: 80vh;
     margin: 20px;
     gap: 20px;

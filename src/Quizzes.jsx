@@ -1,20 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Question from "./Question";
 import { nanoid } from "nanoid";
 import { decode } from "html-entities";
 
-export default function Questions() {
+export default function Quizzes({ options, setIsClicked, setIsStarted, setOptions }) {
   const [selectedAnswers, setSelectedAnswers] = React.useState({});
   const [correctAnswers, setCorrectAnswers] = React.useState({});
   const [quizData, setQuizData] = React.useState([]);
   const [score, setScore] = React.useState(0);
   const [showScore, setShowScore] = React.useState(false);
-  const [refetch, setRefetch] = React.useState(false);
-
-  const apiUrl =
-    "https://opentdb.com/api.php?amount=5&category=18&difficulty=easy&type=multiple";
 
   React.useEffect(() => {
+    const apiUrl = `https://opentdb.com/api.php?amount=${options.numberOfQuestions}&category=${options.category}&difficulty=${options.difficulty}&type=multiple`;
     async function getData() {
       try {
         const response = await fetch(apiUrl);
@@ -49,7 +46,7 @@ export default function Questions() {
     }
 
     getData();
-  }, [refetch]);
+  }, [options]);
 
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -95,14 +92,20 @@ export default function Questions() {
   }, [selectedAnswers, correctAnswers]);
 
   function handlePlayAgain() {
-    setRefetch((prevState) => !prevState);
     setShowScore(false);
-    setSelectedAnswers([]);
-    setCorrectAnswers([]);
+    setSelectedAnswers({});
+    setCorrectAnswers({});
     setScore(0);
+    setIsStarted(false)
+    setIsClicked(true)
+    setOptions({
+      category: "",
+      difficulty: "",
+      numberOfQuestions: "",
+    })
   }
 
-  const quizElements = quizData.map((question) => (
+  const quizElements = quizData?.map((question) => (
     <Question
       key={question.id}
       answers={question.answers}
@@ -123,12 +126,12 @@ export default function Questions() {
           <h3 className="user-score">
             You scored {score} out of {quizData.length} correct answers
           </h3>
-          <button id="play-again-btn" onClick={handlePlayAgain}>
+          <button className="button" onClick={handlePlayAgain}>
             Play Again
           </button>
         </div>
       ) : (
-        <button id="check-btn" onClick={handleCheckAnswer}>
+        <button className="button" onClick={handleCheckAnswer}>
           Check Answer
         </button>
       )}
