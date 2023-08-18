@@ -7,9 +7,14 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint --fix",
+    "prettier": "npx prettier src --check",
+    "prettier:fix": "npm run prettier -- --write",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "preview": "vite preview"
   },
   "dependencies": {
+    "cli-autocomplete": "^0.4.3",
     "html-entities": "^2.3.5",
     "nanoid": "^4.0.2",
     "prop-types": "^15.8.1",

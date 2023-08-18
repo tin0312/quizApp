@@ -1,17 +1,19 @@
-import React, { useState } from "react";
-import "./App.css";
-import StartPage from "./StartPage";
-import Quizzes from "./Quizzes";
-import Options from "./Options";
+import React, { useState, createContext } from 'react';
+import './App.css';
+import StartPage from './StartPage';
+import Quizzes from './Quizzes';
+import Options from './Options';
+
+export const AppContext = createContext();
 
 export default function App() {
   const [isClicked, setIsClicked] = useState(false);
   const [isStarted, setIsStarted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [options, setOptions] = useState({
-    category: "",
-    difficulty: "",
-    numberOfQuestions: "",
+    category: '',
+    difficulty: '',
+    numberOfQuestions: '',
   });
 
   const handleStartQuiz = () => {
@@ -25,47 +27,26 @@ export default function App() {
   const handleClick = () => {
     setIsClicked(true);
   };
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setOptions((prevOptions) => {
-      return {
-        ...prevOptions,
-        [name]: name === "numberOfQuestion" ? parseInt(value) : value,
-      };
-    });
+
+  const contextValue = {
+    setIsStarted,
+    setIsClicked,
+    setIsLoading,
+    options,
+    setOptions,
   };
-  const handlePlayAgain = () => {
-    setIsStarted(false)
-    setIsClicked(true)
-  }
 
   return (
-    <div className="main-container">
-      {isStarted ? (
-        <Quizzes
-          options={options}
-          setIsClicked = {setIsClicked}
-          setIsStarted = {setIsStarted}
-          setOptions = {setOptions}
-        />
-      ) : isClicked ? (
-        <Options
-          handleStartQuiz={handleStartQuiz}
-          loading={isLoading}
-          options={options}
-          handleChange={handleChange}
-        />
-      ) : (
-        <StartPage handleClick={handleClick} />
-      )}
-    </div>
+    <AppContext.Provider value={contextValue}>
+      <div className='main-container'>
+        {isStarted ? (
+          <Quizzes />
+        ) : isClicked ? (
+          <Options isloading={isLoading} handleStartQuiz={handleStartQuiz} />
+        ) : (
+          <StartPage handleClick={handleClick} />
+        )}
+      </div>
+    </AppContext.Provider>
   );
 }
-
-
-/*
-
-hit play again => make isClicked true => rendering option page again
-
-
-*/

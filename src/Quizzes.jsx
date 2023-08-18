@@ -1,14 +1,16 @@
-import React, { useState } from "react";
-import Question from "./Question";
-import { nanoid } from "nanoid";
-import { decode } from "html-entities";
+import React, { useState, useContext } from 'react';
+import Question from './Question';
+import { nanoid } from 'nanoid';
+import { decode } from 'html-entities';
+import { AppContext } from './App';
 
-export default function Quizzes({ options, setIsClicked, setIsStarted, setOptions }) {
-  const [selectedAnswers, setSelectedAnswers] = React.useState({});
-  const [correctAnswers, setCorrectAnswers] = React.useState({});
-  const [quizData, setQuizData] = React.useState([]);
-  const [score, setScore] = React.useState(0);
-  const [showScore, setShowScore] = React.useState(false);
+export default function Quizzes() {
+  const { options, setIsStarted, setIsClicked, setOptions } = useContext(AppContext);
+  const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [correctAnswers, setCorrectAnswers] = useState({});
+  const [quizData, setQuizData] = useState([]);
+  const [score, setScore] = useState(0);
+  const [showScore, setShowScore] = useState(false);
 
   React.useEffect(() => {
     const apiUrl = `https://opentdb.com/api.php?amount=${options.numberOfQuestions}&category=${options.category}&difficulty=${options.difficulty}&type=multiple`;
@@ -16,12 +18,8 @@ export default function Quizzes({ options, setIsClicked, setIsStarted, setOption
       try {
         const response = await fetch(apiUrl);
         const data = await response.json();
-
         const shuffledData = data.results.map((question) => {
-          const allAnswers = shuffleArray([
-            ...question.incorrect_answers,
-            question.correct_answer,
-          ]);
+          const allAnswers = shuffleArray([...question.incorrect_answers, question.correct_answer]);
           const decodedQuestion = decode(question.question);
           const decodedAnswers = allAnswers.map((answer) => decode(answer));
           const correctAnswer = decode(question.correct_answer);
@@ -96,13 +94,13 @@ export default function Quizzes({ options, setIsClicked, setIsStarted, setOption
     setSelectedAnswers({});
     setCorrectAnswers({});
     setScore(0);
-    setIsStarted(false)
-    setIsClicked(true)
+    setIsStarted(false);
+    setIsClicked(true);
     setOptions({
-      category: "",
-      difficulty: "",
-      numberOfQuestions: "",
-    })
+      category: '',
+      difficulty: '',
+      numberOfQuestions: '',
+    });
   }
 
   const quizElements = quizData?.map((question) => (
@@ -118,20 +116,20 @@ export default function Quizzes({ options, setIsClicked, setIsStarted, setOption
   ));
 
   return (
-    <div className="main-container">
+    <div className='main-container'>
       {quizElements}
 
       {showScore ? (
-        <div className="show-score">
-          <h3 className="user-score">
+        <div className='show-score'>
+          <h3 className='user-score'>
             You scored {score} out of {quizData.length} correct answers
           </h3>
-          <button className="button" onClick={handlePlayAgain}>
+          <button className='button' onClick={handlePlayAgain}>
             Play Again
           </button>
         </div>
       ) : (
-        <button className="button" onClick={handleCheckAnswer}>
+        <button className='button' onClick={handleCheckAnswer}>
           Check Answer
         </button>
       )}
