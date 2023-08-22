@@ -70,7 +70,7 @@ export default function Options({ handleStartQuiz, isloading }) {
       />
 
       {isloading ? (
-        <p className='loading-state'>Loading...</p>
+        <div className='lds-hourglass'></div>
       ) : (
         <button className='button' type='button' onClick={handleShowMessage}>
           Start Quiz
