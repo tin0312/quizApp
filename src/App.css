@@ -53,47 +53,64 @@ body {
   height: 100vh;
   justify-content: space-around;
 }
+button#to-option {
+  display: flex;
+  gap: 6px; 
+  margin-left: 0;
+  width: auto;
+  height: auto;
+}
+option, #numberOfQuestions {
+  text-align: center;
+}
 .option-window {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  gap: 10px;
+  gap: 25px;
+  font-family: 'Karla', 'sans-serif';
+  width: 40vw;
+  height:80vh;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 10px 5px 50px #4d5b9e;
 }
-.lds-hourglass {
+.lds-ring {
   display: inline-block;
   position: relative;
   width: 80px;
   height: 80px;
 }
-.lds-hourglass:after {
-  content: " ";
-  display: block;
-  border-radius: 50%;
-  background-color: #344078;
-  width: 0;
-  height: 0;
-  margin: 8px;
+.lds-ring div {
   box-sizing: border-box;
-  border: 32px solid #fff;
-  border-color: #fff transparent #fff transparent;
-  animation: lds-hourglass 1.2s infinite;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #4d5b9e;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #4d5b9e transparent transparent transparent;
 }
-@keyframes lds-hourglass {
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
   0% {
-    transform: rotate(0);
-    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-  }
-  50% {
-    transform: rotate(900deg);
-    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: rotate(0deg);
   }
   100% {
-    transform: rotate(1800deg);
+    transform: rotate(360deg);
   }
 }
-
 .container {
   display: flex;
   flex-direction: column;
@@ -159,6 +176,9 @@ input[type='radio'].incorrect-answer + label {
 }
 .button {
   width: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: auto;
   margin: 0 auto;
   padding: 10px;
@@ -168,7 +188,6 @@ input[type='radio'].incorrect-answer + label {
   border: none;
   cursor: pointer;
   font-weight: 500;
-  text-align: center;
   font-family: 'Inter', sans-serif;
 }
 

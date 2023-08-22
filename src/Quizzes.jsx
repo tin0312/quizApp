@@ -3,6 +3,8 @@ import Question from './Question';
 import { nanoid } from 'nanoid';
 import { decode } from 'html-entities';
 import { AppContext } from './App';
+import { useWindowSize } from '@uidotdev/usehooks';
+import Confetti from 'react-confetti';
 
 export default function Quizzes() {
   const { options, setIsStarted, setIsClicked, setOptions } = useContext(AppContext);
@@ -11,7 +13,8 @@ export default function Quizzes() {
   const [quizData, setQuizData] = useState([]);
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
-
+  const [isRefetch, setIsRefetch] = useState(false);
+  const { width, height } = useWindowSize();
   React.useEffect(() => {
     const apiUrl = `https://opentdb.com/api.php?amount=${options.numberOfQuestions}&category=${options.category}&difficulty=${options.difficulty}&type=multiple`;
     async function getData() {
@@ -44,7 +47,7 @@ export default function Quizzes() {
     }
 
     getData();
-  }, [options]);
+  }, [isRefetch]);
 
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -56,10 +59,6 @@ export default function Quizzes() {
     return array;
   }
 
-  function handleCheckAnswer() {
-    setShowScore(true);
-  }
-
   function handleSelectedAnswer(questionID, selectedAnswer) {
     setSelectedAnswers((prevAnswer) => {
       return {
@@ -67,6 +66,19 @@ export default function Quizzes() {
         [questionID]: selectedAnswer,
       };
     });
+  }
+  function handleCheckAnswer() {
+    // check if all answers are selected
+    // check if numbers of questions with corresponding selected answer equal to the actual questions
+    const isAllSelected =
+      Object.values(selectedAnswers).every((value) => value !== '') &&
+      quizData?.length === Object.keys(selectedAnswers)?.length;
+    //
+    if (!isAllSelected) {
+      window.alert('Please select all answers');
+    } else {
+      setShowScore(true);
+    }
   }
 
   React.useEffect(() => {
@@ -90,17 +102,24 @@ export default function Quizzes() {
   }, [selectedAnswers, correctAnswers]);
 
   function handlePlayAgain() {
+    setIsRefetch(true);
     setShowScore(false);
     setSelectedAnswers({});
     setCorrectAnswers({});
     setScore(0);
-    setIsStarted(false);
-    setIsClicked(true);
-    setOptions({
-      category: '',
-      difficulty: '',
-      numberOfQuestions: '',
-    });
+  }
+  function returnToOptions(){
+          setIsStarted(false)
+          setIsClicked(true)
+          setOptions({
+            category: '', 
+            difficulty: '',
+            numberOfQuestions: '',
+          })
+          setCorrectAnswers({})
+          setCorrectAnswers({})
+          setScore(0)
+          setShowScore(false) 
   }
 
   const quizElements = quizData?.map((question) => (
@@ -117,17 +136,25 @@ export default function Quizzes() {
 
   return (
     <div className='main-container'>
+      <div className='button-option-container'>
+        <button onClick = {returnToOptions} className='button' id='to-option'>
+          <span className='material-symbols-outlined'>arrow_back</span>Options
+        </button>
+      </div>
       {quizElements}
 
       {showScore ? (
-        <div className='show-score'>
-          <h3 className='user-score'>
-            You scored {score} out of {quizData.length} correct answers
-          </h3>
-          <button className='button' onClick={handlePlayAgain}>
-            Play Again
-          </button>
-        </div>
+        <>
+          <Confetti width={width} height={height} />
+          <div className='show-score'>
+            <h3 className='user-score'>
+              You scored {score} out of {quizData.length} correct answers
+            </h3>
+            <button className='button' onClick={handlePlayAgain}>
+              Play Again
+            </button>
+          </div>
+        </>
       ) : (
         <button className='button' onClick={handleCheckAnswer}>
           Check Answer
@@ -136,3 +163,11 @@ export default function Quizzes() {
     </div>
   );
 }
+/*
+
+
+Task 3: Play again btn can refetch the same options data from the last API call
+
+- Go back to option page
+
+*/

@@ -24,7 +24,7 @@ export default function Options({ handleStartQuiz, isloading }) {
   return (
     <form className='option-window' action=''>
       <select value={options.category} name='category' id='category' onChange={handleChange}>
-        <option value=''>-- Any category --</option>
+        <option value=''>--- Any category ---</option>
         <option value='9'>General Knowledge</option>
         <option value='10'>Entertainment: Books</option>
         <option value='11'>Entertainment: Film </option>
@@ -50,10 +50,8 @@ export default function Options({ handleStartQuiz, isloading }) {
         <option value='31'>Entertainment: Japanese Anime & Manga</option>
         <option value='32'>Entertainment: Cartoon & Animation</option>
       </select>
-
-      <label htmlFor=''>Difficulty level</label>
       <select name='difficulty' id='difficulty' onChange={handleChange} value={options.difficulty}>
-        <option value=''>Random</option>
+        <option value=''>-- Any level --</option>
         <option value='easy'>Easy</option>
         <option value='medium'>Medium</option>
         <option value='hard'>Hard</option>
@@ -67,10 +65,11 @@ export default function Options({ handleStartQuiz, isloading }) {
         max='10'
         value={options.numberOfQuestions}
         onChange={handleChange}
+        placeholder='1'
       />
 
       {isloading ? (
-        <div className='lds-hourglass'></div>
+        <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
       ) : (
         <button className='button' type='button' onClick={handleShowMessage}>
           Start Quiz
