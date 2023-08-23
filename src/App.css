@@ -10,14 +10,6 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
-.start-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  gap: 10px;
-}
 .start-container--info {
   font-weight: 400;
   font-size: 16px;
@@ -43,7 +35,9 @@ body {
   letter-spacing: 1.25px;
   margin: 0 auto;
   padding: 10px;
+  font-family: 'Karla', 'sans-serif';
 }
+
 .main-container {
   margin-top: 0;
   margin-left: 70px;
@@ -70,9 +64,7 @@ option, #numberOfQuestions {
   align-items: center;
   gap: 25px;
   font-family: 'Karla', 'sans-serif';
-  width: 40vw;
-  height:80vh;
-  margin: 0 auto;
+  height: 80vh;
   border-radius: 10px;
   box-shadow: 10px 5px 50px #4d5b9e;
 }
@@ -117,6 +109,7 @@ option, #numberOfQuestions {
   gap: 30px;
   align-items: flex-start;
   width: 100%;
+  margin-left: 0;
 }
 
 .container h2 {

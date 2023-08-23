@@ -1,4 +1,5 @@
 import React, { useState, createContext } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import StartPage from './StartPage';
 import Quizzes from './Quizzes';

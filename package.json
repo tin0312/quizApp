@@ -15,11 +15,13 @@
   },
   "dependencies": {
     "@uidotdev/usehooks": "^2.1.1",
+    "bootstrap": "^5.3.1",
     "cli-autocomplete": "^0.4.3",
     "html-entities": "^2.3.5",
     "nanoid": "^4.0.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.8.0",
     "react-confetti": "^6.1.0",
     "react-dom": "^18.2.0"
   },
