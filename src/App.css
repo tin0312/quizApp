@@ -3,25 +3,12 @@
   padding: 0;
   box-sizing: border-box;
   font-size: 16px;
-  
- 
-
 }
 body {
   color: #293264;
   background-image: url('intro-page.png');
   background-repeat: no-repeat;
   background-size: cover;
-}
-.start-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  gap: 10px;
-
-  
 }
 .start-container--info {
   font-weight: 400;
@@ -40,7 +27,7 @@ body {
   letter-spacing: 2.5px;
   font-family: 'Karla', 'sans-serif';
 }
-.developer{ 
+.developer {
   font-size: 16px;
   font-weight: 400;
   line-height: 19px;
@@ -48,10 +35,10 @@ body {
   letter-spacing: 1.25px;
   margin: 0 auto;
   padding: 10px;
-
+  font-family: 'Karla', 'sans-serif';
 }
-.main-container {
 
+.main-container {
   margin-top: 0;
   margin-left: 70px;
   margin-right: 70px;
@@ -59,31 +46,82 @@ body {
   flex-direction: column;
   height: 100vh;
   justify-content: space-around;
-  
-  
 }
-.container{
+button#to-option {
+  display: flex;
+  gap: 6px; 
+  margin-left: 0;
+  width: auto;
+  height: auto;
+}
+option, #numberOfQuestions {
+  text-align: center;
+}
+.option-window {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  font-family: 'Karla', 'sans-serif';
+  height: 80vh;
+  border-radius: 10px;
+  box-shadow: 10px 5px 50px #4d5b9e;
+}
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #4d5b9e;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #4d5b9e transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.container {
   display: flex;
   flex-direction: column;
   gap: 30px;
   align-items: flex-start;
- 
   width: 100%;
-
+  margin-left: 0;
 }
 
-.container h2{
+.container h2 {
   font-family: 'Karla', 'sans-serif';
   font-weight: 700;
   font-size: 20px;
   line-height: 19px;
 }
 .container--answers {
- 
   display: flex;
   width: auto;
   gap: 20px;
-
 }
 
 .container--answer {
@@ -92,13 +130,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Inter', 'sans-serif' ;
+  font-family: 'Inter', 'sans-serif';
   font-size: 10px;
   line-height: 18px;
- 
 }
 /*making radio button look likes like a button*/
-input[type="radio"] {
+input[type='radio'] {
   display: none;
 }
 
@@ -115,7 +152,7 @@ label {
   cursor: pointer;
 }
 
-input[type="radio"]:checked + label {
+input[type='radio']:checked + label {
   background-color: #d6dbf5;
   border: none;
 }
@@ -123,22 +160,18 @@ input[type="radio"]:checked + label {
   background-color: red;
   border: none;
 }
-input[type="radio"].incorrect-answer:checked + label {
+input[type='radio'].incorrect-answer:checked + label {
   background-color: #f8bcbc;
   opacity: 0.5;
-
-  
 }
-input[type="radio"].incorrect-answer + label {
+input[type='radio'].incorrect-answer + label {
   opacity: 0.5;
-
- 
 }
-
-#check-btn,
-#start-button
-{
+.button {
   width: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: auto;
   margin: 0 auto;
   padding: 10px;
@@ -148,33 +181,23 @@ input[type="radio"].incorrect-answer + label {
   border: none;
   cursor: pointer;
   font-weight: 500;
-  text-align: center;
-  font-family: 'Inter', 'sans-serif';
+  font-family: 'Inter', sans-serif;
 }
 
+.button:hover {
+  background-color: #344078;
+}
 div.show-score {
   display: flex;
   width: 100%;
   justify-content: center;
   gap: 2.5%;
 }
-#play-again-btn {
-  width: 160px;
-  height: auto;
-  padding: 10px;
-  color: white;
-  background-color: #4d5b9e;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-}
 h3.user-score {
   font-family: 'Inter', 'sans-serif';
   font-weight: 700;
   font-size: 16px;
   align-self: center;
- 
-  
 }
 
 /* Media Queries */
@@ -185,7 +208,7 @@ h3.user-score {
     margin: 20px;
     gap: 20px;
   }
-  .start-container{
+  .start-container {
     height: 80vh;
     margin: 20px;
     gap: 20px;
