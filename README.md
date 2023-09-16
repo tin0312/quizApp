@@ -8,8 +8,9 @@ The quiz app helps users to leverage their knowledge in a various categories.
 
 - [Overview](#overview)
   - [Screenshot](#screenshot)
-  - [Links](#link)
-  - [My process](#myprocess)
+  - [Links](#links)
+  - [My process](#my-process)
+    - [What I learn](#what-i-learned)
 - [Build with](#build-with)
 - [Author](#author)
 - [Acknowledgements](#acknowledgement)
@@ -49,3 +50,7 @@ The quiz app helps users to leverage their knowledge in a various categories.
 - Github: [@tin0312](https://github.com/tin0312)
 
 - Twitter: [@justin_hppp](https://twitter.com/justin_hppp)
+
+## Acknowledgement
+
+- Design is credited to [Scrimba](https://scrimba.com/dashboard#overview)
