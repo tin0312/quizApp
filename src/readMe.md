@@ -1,21 +1,51 @@
-## Render 2 screens start & questions // DONE
+# QUIZ APP
 
-## Pull 5 questions from the OTDB // DONE
+**Project description**
 
-## Tally correct answer after "Check answer" button is clicked
+The quiz app helps users to leverage their knowledge in a various categories.
 
-## Styles & Polish
+## Table of content
 
-### Hints
+- [Overview](#overview)
+  - [Screenshot](#screenshot)
+  - [Links](#link)
+  - [My process](#myprocess)
+- [Build with](#build-with)
+- [Author](#author)
+- [Acknowledgements](#acknowledgement)
 
-## Use a library to decode the HTML Entities (he or html-entities) // DONE
+## Overview
 
-## Create new array with all answers and randomly insert correct_answer with incorrect_amswer // DONE (Method to shuffle items in an array at random or how to insert an item randomly to an array)
+### Screenshot
 
-## Limit answer choice to 1 and style selected answer:
+![Quiz-App](./assets/screenshot.png)
 
-# (1): Track selected answer index inside inside the question object
+### Links
 
-# (2): Use an HTML form w/radio inputs using the same name attribute to automatically only allow one selection // DONE(tips: make a radio looks like a button) // SELECTED
+- Solution URL: [Github](https://github.com/tin0312/quizApp)
+- Live Site URL: [Netlify](https://unrivaled-sorbet-b6c280.netlify.app/)
 
-### <!---------------------------------DONE------------------------------------>
+### My process
+
+### What I learned
+
+1. Working with API with Async/Await functions.
+2. Do it in a React way apply single responsibility principle.
+3. How to use the useState hook and its functionalities.
+4. Using useEffect hooks for asynchronous operations like fetching data from an external source, such as an API or database.
+
+## Build with
+
+- Sematic HTML5 markup.
+- CSS customed properties.
+- Flexbox
+- [Bootstrap5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+- [React](https://react.dev/)
+- JavaScript ES6+
+
+## Author
+
+- Hoang Nhat Truong
+- Github: [@tin0312](https://github.com/tin0312)
+
+- Twitter: [@justin_hppp](https://twitter.com/justin_hppp)
