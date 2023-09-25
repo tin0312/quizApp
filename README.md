@@ -19,7 +19,7 @@ The quiz app helps users to leverage their knowledge in a various categories.
 
 ### Screenshot
 
-![Quiz-App](./assets/screenshot.png)
+![Quiz-App](./src/assets/screenshot.png)
 
 ### Links
 
